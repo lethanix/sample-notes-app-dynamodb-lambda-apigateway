@@ -55,6 +55,9 @@ jobs:
       - name: Deploy the frontend
         run: make frontend
 
+      - name: Run the tests
+        run: make test
+
       - name: Send a Slack notification
         if: failure() || github.event_name != 'pull_request'
         uses: ravsamhq/notify-slack-action@v2

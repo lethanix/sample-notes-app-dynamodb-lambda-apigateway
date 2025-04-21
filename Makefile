@@ -43,6 +43,10 @@ deploy:
 		yarn cdklocal bootstrap;
 		yarn cdklocal deploy;
 
+## Run the tests
+test:
+		yarn test
+
 ## Start LocalStack in detached mode
 start:
 		localstack start -d
