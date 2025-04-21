@@ -30,10 +30,10 @@ install:
 
 ## Build and deploy the frontend
 frontend:
-		# yarn prepare:frontend-local
-		# yarn build:frontend
-		# yarn cdklocal bootstrap --app="node dist/aws-sdk-js-notes-app-frontend.js"
-		# yarn cdklocal deploy --app="node dist/aws-sdk-js-notes-app-frontend.js"
+		yarn prepare:frontend-local
+		yarn build:frontend
+		yarn cdklocal bootstrap --app="node dist/aws-sdk-js-notes-app-frontend.js"
+		yarn cdklocal deploy --app="node dist/aws-sdk-js-notes-app-frontend.js"
 		@distributionId=$$(awslocal cloudfront list-distributions | jq -r '.DistributionList.Items[0].Id') && \
 		echo "Access the frontend at: http://localhost:4566/cloudfront/$$distributionId/"
 
