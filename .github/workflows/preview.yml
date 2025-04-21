@@ -13,6 +13,16 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 22
+
+      - name: Install CDK
+        run: |
+          npm install -g aws-cdk-local aws-cdk
+          cdklocal --version
+
       - name: Deploy Preview
         uses: LocalStack/setup-localstack@v0.2.4
         env:
@@ -26,7 +36,6 @@ jobs:
           # Multi line commands are folding for some reason, so we enforce new lines
           # For more predictable usage, use script files
           preview-cmd: |
-            npm install -g aws-cdk-local aws-cdk;
             make install;
             make deploy;
             make frontend;
