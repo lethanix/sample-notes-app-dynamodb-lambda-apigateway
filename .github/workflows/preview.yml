@@ -36,6 +36,7 @@ jobs:
           # Multi line commands are folding for some reason, so we enforce new lines
           # For more predictable usage, use script files
           preview-cmd: |
+            export NODE_OPTIONS=--tls-cipher-list="DEFAULT@SECLEVEL=1"
             make install;
             make deploy;
             make frontend;
