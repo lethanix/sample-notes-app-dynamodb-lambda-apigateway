@@ -36,9 +36,15 @@ jobs:
           # Multi line commands are folding for some reason, so we enforce new lines
           # For more predictable usage, use script files
           preview-cmd: |
-            export NODE_OPTIONS=--tls-cipher-list="DEFAULT@SECLEVEL=1"
-            make install;
-            make deploy;
-            make frontend;
+            npm i -g yarn;
+            export NODE_OPTIONS=--tls-cipher-list="DEFAULT@SECLEVEL=1";
+            yarn install;
+            yarn build:backend;
+		        yarn cdklocal bootstrap;
+		        yarn cdklocal deploy;
+            yarn prepare:frontend-local;
+		        yarn build:frontend;
+		        yarn cdklocal bootstrap --app="node dist/aws-sdk-js-notes-app-frontend.js";
+		        yarn cdklocal deploy --app="node dist/aws-sdk-js-notes-app-frontend.js";
             distributionId=$(awslocal cloudfront list-distributions | jq -r '.DistributionList.Items[0].Id');
             echo LS_PREVIEW_URL=$AWS_ENDPOINT_URL/cloudfront/$distributionId/ >> $GITHUB_ENV;
