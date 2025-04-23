@@ -37,7 +37,7 @@ jobs:
           # For more predictable usage, use script files
           preview-cmd: |
             npm i -g yarn;
-            export NODE_OPTIONS=--tls-cipher-list="DEFAULT@SECLEVEL=1";
+            export NODE_OPTIONS='--tls-min-v1.2 --tls-max-v1.2 --tls-cipher-list="DEFAULT@SECLEVEL=1"'
             yarn install;
             yarn build:backend;
             yarn cdklocal bootstrap;
